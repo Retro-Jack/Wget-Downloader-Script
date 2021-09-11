@@ -2,7 +2,7 @@
 CLS
 IF [%1] == [] GOTO missing_arg
 IF [%2] == [] GOTO missing_arg
-IF NOT EXIST %2% GOTO bad_dir
+IF NOT EXIST %2 GOTO bad_dir
 
 ECHO About to download %1 to %2
 ECHO.

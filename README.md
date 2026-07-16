@@ -1,14 +1,11 @@
 # Wget Downloader Script
 
-Interactive website mirror downloader built on `wget`. It prompts for a URL and
-an output directory, blocks local / loopback / drive-letter / UNC targets, then
-mirrors the site — page requisites, link conversion, `robots=off`, and forum
-paths skipped.
+Interactive website mirror downloader built on `wget` (`wget.sh`). It prompts
+for a URL and an output directory, blocks local / loopback / drive-letter / UNC
+targets, then mirrors the site — page requisites, link conversion, `robots=off`,
+and forum paths skipped.
 
-- **`wget.cmd`** — Windows batch version (uses the bundled `wget64`).
-- **`wget.sh`** — Bash port for Linux/macOS (uses the system `wget`).
-
-## Usage (bash)
+## Usage
 
 ```sh
 chmod +x wget.sh

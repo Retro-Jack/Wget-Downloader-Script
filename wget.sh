@@ -2,14 +2,13 @@
 #
 # wget.sh — interactive website mirror downloader.
 #
-# Bash port of wget.cmd (Windows batch). Prompts for a URL and an output
-# directory, refuses local / loopback / drive-letter / UNC targets, then
-# mirrors the site with wget: page requisites, link conversion, robots off,
-# forum paths skipped.
+# Prompts for a URL and an output directory, refuses local / loopback /
+# drive-letter / UNC targets, then mirrors the site with wget: page requisites,
+# link conversion, robots off, forum paths skipped.
 #
 set -u
 
-# Terminal bell — the batch rang it via `rundll32 cmdext.dll,MessageBeepStub`.
+# Terminal bell — audible cue on a bad entry and on completion.
 beep() { printf '\a'; }
 
 while true; do

@@ -1,0 +1,12 @@
+# Editor / OS junk
+.DS_Store
+._*
+*~
+*.swp
+
+# Local Claude Code worktrees/settings
+.claude/
+
+# Don't commit anything downloaded while testing the script
+/downloads/
+/test-output/

@@ -2,6 +2,9 @@
 #
 # wget.sh — interactive website mirror downloader.
 #
+# SPDX-License-Identifier: GPL-3.0-or-later
+# Copyright (C) 2026 Retro-Jack
+#
 # Prompts for a URL and an output directory, refuses local / loopback /
 # drive-letter / UNC targets, then mirrors the site with wget: page requisites,
 # link conversion, robots off, forum paths skipped.

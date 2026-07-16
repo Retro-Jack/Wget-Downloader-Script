@@ -25,7 +25,7 @@ while true; do
 
     # Reject local addresses, loopback, drive letters and UNC paths.
     case "${url}" in
-        http://localhost*|https://localhost*|http://127.0.0.1*|https://127.0.0.1*|file://*|[A-Za-z]:*|'\\'*)
+        http://localhost*|https://localhost*|http://127.0.0.1*|https://127.0.0.1*|file://*|[A-Za-z]:*|\\*)
             echo "Error: Local addresses, drives, and network paths are not allowed."
             beep
             continue

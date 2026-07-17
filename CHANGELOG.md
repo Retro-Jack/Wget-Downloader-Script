@@ -6,6 +6,34 @@ to follow [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [2.0.0] - 2026-07-17
+
+### Added
+- Python asset post-pass (requires `python3`, standard library only): after the
+  Wget crawl, parses the saved HTML/CSS and fetches assets Wget can't discover —
+  lazy-loaded images (`data-src`, `data-lazy-src`, `data-thumbnail`, `srcset`,
+  CSS `url()`) and cross-host / CDN assets — from any host, rewrites the
+  references to local relative paths, and injects a real `src` on lazy `<img>`
+  tags so pages render offline without JavaScript. Re-scans until the asset set
+  stabilises (e.g. assets referenced inside freshly fetched CSS).
+- `/community/` (wpForo) added to the skip pattern, and the WordPress cruft
+  filter expanded: login / registration, `wp-admin`, `wp-json`, `xmlrpc.php`,
+  oEmbed, `wlwmanifest`, RSD, feeds, `?p=` short-link duplicates, and
+  comment / share query noise.
+- Usage header documenting the two-phase flow, requirements, and output layout.
+
+### Changed
+- Modernised the Wget request headers — a current Firefox user-agent and an
+  `https` Google referer — so fewer sites serve degraded content or block the
+  crawl outright.
+- The crawl now stays on the site host; cross-host assets are back-filled by the
+  post-pass instead of via `--span-hosts`, so a site's CDN hostnames no longer
+  need to be known up front.
+
+### Requires
+- `python3` (standard library only) for the asset post-pass. The Wget mirror
+  still runs without it, but lazy / CDN-hosted assets may be missing.
+
 ## [1.0.0] - 2026-07-16
 
 ### Added

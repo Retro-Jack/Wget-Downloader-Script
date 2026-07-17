@@ -6,6 +6,26 @@ to follow [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [2.1.0] - 2026-07-17
+
+### Added
+- Wayback Machine mode. A `web.archive.org/web/<timestamp>/<url>` snapshot URL is
+  auto-detected and reconstructs the **original** site instead of mirroring the
+  archive's wrapper: each resource is fetched through Wayback's `id_` identity
+  endpoint (raw original bytes — no toolbar, original links) and rebuilt at
+  `<output_dir>/<original-host>/…`.
+  - **Adaptive rate-limiting** — `web.archive.org` hard-refuses bursts, so the
+    fetch throttles, backs off on blocks, and converges on a sustainable pace.
+  - **Nearest-capture recovery** — a page that 404s at the requested timestamp is
+    refetched from its closest capture in time (Availability API, routed through
+    the same throttle so a block can't masquerade as "no capture"), recovering
+    content deleted before the snapshot.
+  - **Resumable** — re-running skips assets already on disk.
+  - Forum / session-id URLs are skipped to avoid infinite crawler traps.
+
+### Requires
+- `python3` (standard library only) for Wayback mode, as for the asset post-pass.
+
 ## [2.0.0] - 2026-07-17
 
 ### Added

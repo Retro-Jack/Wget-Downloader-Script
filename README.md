@@ -30,6 +30,29 @@ doesn't exist). It shows what it's about to do and waits for confirmation;
 `Ctrl-C` aborts there. A terminal bell rings on a rejected entry and when the
 download finishes.
 
+## Wayback Machine mode
+
+Paste a Wayback Machine snapshot URL —
+`https://web.archive.org/web/<timestamp>/http://example.com/` — and the script
+auto-switches to a dedicated mode that reconstructs the **original** site rather
+than mirroring the archive's wrapper. It fetches each resource through Wayback's
+`id_` identity endpoint (raw original bytes — no toolbar, original links) and
+rebuilds the site at `<output_dir>/<original-host>/…` so it browses offline like
+the real thing.
+
+- **Adaptive rate-limiting.** `web.archive.org` hard-refuses bursts, so the fetch
+  throttles itself, backs off on blocks, and settles into a sustainable pace.
+  Expect it to be slow — that's the archive, not the script.
+- **Dead-link recovery.** A page that 404s at the requested timestamp is
+  refetched from its nearest capture in time (via the Availability API), so you
+  recover content deleted before the snapshot. This trades strict point-in-time
+  fidelity for completeness.
+- **Resumable.** Re-running skips assets already downloaded, so an interrupted
+  crawl continues where it left off.
+- Forum / session-id URLs are skipped to avoid infinite crawler traps.
+
+Requires `python3` (standard library only).
+
 ## Notes
 
 - **Local targets are refused.** `localhost`, `127.0.0.1`, `file://`, Windows
